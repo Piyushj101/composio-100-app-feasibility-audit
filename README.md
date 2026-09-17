@@ -1,6 +1,6 @@
 # Composio 100-App Feasibility Study — Research Agent
 
-Take-home for the AI Product Ops Intern role. This repo is the actual
+This repo is the actual
 pipeline that produced the case-study page — not a mockup of one.
 
 **Case study (live):** the published HTML page is the deliverable; see the
