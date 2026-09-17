@@ -1,0 +1,113 @@
+{
+  "n_apps": 100,
+  "fetch_success_rate_pct": 94.0,
+  "agent_only_self_serve_agreement_pct": 18.1,
+  "auth_distribution": {
+    "API key / token": 73,
+    "OAuth2": 62,
+    "None / unclear": 11,
+    "Basic auth": 8
+  },
+  "self_serve_distribution": {
+    "yes": 64,
+    "partial": 20,
+    "no": 9,
+    "unknown": 5,
+    "n/a": 2
+  },
+  "self_serve_by_category": {
+    "CRM & Sales": {
+      "partial": 2,
+      "yes": 7,
+      "no": 1
+    },
+    "Support & Helpdesk": {
+      "yes": 8,
+      "partial": 1,
+      "no": 1
+    },
+    "Comms & Messaging": {
+      "yes": 7,
+      "unknown": 1,
+      "partial": 2
+    },
+    "Marketing/Ads/Email/Social": {
+      "partial": 4,
+      "no": 1,
+      "yes": 5
+    },
+    "Ecommerce": {
+      "yes": 5,
+      "no": 1,
+      "partial": 4
+    },
+    "Data/SEO/Scraping": {
+      "yes": 6,
+      "partial": 3,
+      "n/a": 1
+    },
+    "Dev/Infra/Data": {
+      "yes": 10
+    },
+    "Productivity/PM": {
+      "yes": 10
+    },
+    "Finance/Fintech": {
+      "yes": 4,
+      "partial": 1,
+      "unknown": 2,
+      "no": 3
+    },
+    "AI/Research/Media": {
+      "no": 2,
+      "partial": 3,
+      "unknown": 2,
+      "yes": 2,
+      "n/a": 1
+    }
+  },
+  "mcp_official_or_known_count": 24,
+  "buildable_yes": 83,
+  "buildable_no": 17,
+  "buildable_grey_partial": 0,
+  "top_blockers": {
+    "Other / product-specific": 14,
+    "Paid-plan / enterprise-tier gate": 9,
+    "App / production review required": 6,
+    "Partnership / partner-program gate": 5,
+    "Customer-only credentials": 3,
+    "No public developer API found": 2,
+    "Not API-first (CLI/local tool only)": 2,
+    "Docs/portal itself requires login": 1,
+    "Contact-sales / apply-for-access": 1
+  },
+  "confidence_distribution": {
+    "high": 61,
+    "medium": 28,
+    "low": 11
+  },
+  "verification_sample_size": 8,
+  "verification_hits": 3,
+  "verification_misses": 4,
+  "verification_partial": 1,
+  "confidence_calibration": {
+    "medium": {
+      "checked": 3,
+      "needed_correction": 1,
+      "correction_rate_pct": 33.3
+    },
+    "low": {
+      "checked": 4,
+      "needed_correction": 4,
+      "correction_rate_pct": 100.0
+    },
+    "high": {
+      "checked": 1,
+      "needed_correction": 0,
+      "correction_rate_pct": 0.0
+    }
+  },
+  "rows_corrected_by_verification": 4,
+  "rows_refined_by_verification": 1,
+  "rows_confirmed_by_verification": 3
+}

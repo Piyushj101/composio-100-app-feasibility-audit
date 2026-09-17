@@ -1,0 +1,92 @@
+{
+  "n_apps": 100,
+  "fetch_success_rate": 94.0,
+  "auth_distribution": {
+    "API key / token": 73,
+    "OAuth2": 62,
+    "None / unclear (not a hosted API)": 11,
+    "Basic auth": 8
+  },
+  "self_serve_distribution": {
+    "yes": 62,
+    "partial": 18,
+    "no": 11,
+    "unknown": 7,
+    "n/a": 2
+  },
+  "self_serve_by_category": {
+    "CRM & Sales": {
+      "partial": 2,
+      "yes": 7,
+      "no": 1
+    },
+    "Support & Helpdesk": {
+      "yes": 7,
+      "partial": 2,
+      "no": 1
+    },
+    "Comms & Messaging": {
+      "yes": 7,
+      "unknown": 1,
+      "partial": 2
+    },
+    "Marketing/Ads/Email/Social": {
+      "partial": 4,
+      "no": 1,
+      "yes": 5
+    },
+    "Ecommerce": {
+      "yes": 5,
+      "no": 1,
+      "partial": 3,
+      "unknown": 1
+    },
+    "Data/SEO/Scraping": {
+      "yes": 5,
+      "partial": 2,
+      "no": 1,
+      "n/a": 1,
+      "unknown": 1
+    },
+    "Dev/Infra/Data": {
+      "yes": 10
+    },
+    "Productivity/PM": {
+      "yes": 10
+    },
+    "Finance/Fintech": {
+      "yes": 4,
+      "partial": 1,
+      "unknown": 2,
+      "no": 3
+    },
+    "AI/Research/Media": {
+      "no": 3,
+      "unknown": 2,
+      "yes": 2,
+      "partial": 2,
+      "n/a": 1
+    }
+  },
+  "mcp_official_count": 22,
+  "buildable_yes": 81,
+  "buildable_no": 19,
+  "buildable_partial_or_yes_with_blocker": 0,
+  "top_blockers": {
+    "Other / product-specific friction": 14,
+    "Paid-plan / enterprise-tier gate": 9,
+    "App/production review required": 6,
+    "Partnership / partner-program gate": 5,
+    "No public developer API found": 5,
+    "Customer-only credentials (must already be a paying user)": 3,
+    "Not API-first (CLI tool / no hosted service)": 2,
+    "Contact-sales / apply-for-access gate": 1
+  },
+  "reviewer_confidence_distribution": {
+    "high": 55,
+    "medium": 30,
+    "low": 15
+  },
+  "agent_only_agreement_pct": 18.1,
+  "agent_checked_n": 94
+}

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100 Apps, Researched by Agent — Composio Toolkit Feasibility Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#12151a; --ink2:#1a1e25; --panel:#20242c; --line:#333944;
+  --paper:#f3efe4; --paper-line:#ddd6c2;
+  --text:#e9e7df; --text-dim:#9aa0ab; --text-faint:#5c6270;
+  --amber:#e8a33d; --amber-dim:#8a6428;
+  --teal:#7fd8c9; --teal-dim:#3f6a61;
+  --red:#e2665f; --red-dim:#7a3a37;
+  --radius:3px;
+  --mono:'IBM Plex Mono', ui-monospace, monospace;
+  --sans:'Space Grotesk', system-ui, sans-serif;
+}
+:root[data-theme="light"]{
+  --ink:#f3efe4; --ink2:#ffffff; --panel:#ffffff; --line:#ddd6c2;
+  --text:#1c1f26; --text-dim:#565b66; --text-faint:#8b8f99;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --ink:#f3efe4; --ink2:#ffffff; --panel:#ffffff; --line:#ddd6c2;
+    --text:#1c1f26; --text-dim:#565b66; --text-faint:#8b8f99;
+  }
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--ink);color:var(--text);font-family:var(--sans);}
+body{line-height:1.5; -webkit-font-smoothing:antialiased;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+::selection{background:var(--amber);color:#12151a;}
+a{color:var(--teal);}
+img{max-width:100%;}
+
+/* ---------- top bar ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb, var(--ink) 92%, transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;}
+.brand{font-family:var(--mono);font-size:13px;letter-spacing:.02em;color:var(--text-dim);display:flex;gap:10px;align-items:center;}
+.brand b{color:var(--amber);font-weight:600;}
+.topnav{display:flex;gap:22px;font-family:var(--mono);font-size:12.5px;}
+.topnav a{color:var(--text-dim);text-decoration:none;}
+.topnav a:hover{color:var(--amber);}
+@media(max-width:720px){.topnav{display:none;}}
+
+/* ---------- hero ---------- */
+.hero{padding:64px 0 44px;border-bottom:1px solid var(--line);}
+.kicker{font-family:var(--mono);font-size:13px;color:var(--amber);margin:0 0 18px;}
+h1{font-size:44px;line-height:1.08;margin:0 0 22px;font-weight:700;letter-spacing:-0.01em;max-width:16ch;}
+.lede{font-size:19px;color:var(--text-dim);max-width:62ch;margin:0 0 34px;}
+.lede b{color:var(--text);font-weight:600;}
+
+.statrow{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:6px;}
+.stat{background:var(--ink2);padding:20px 18px;}
+.stat .n{font-family:var(--mono);font-size:30px;font-weight:600;color:var(--amber);line-height:1;}
+.stat .l{font-size:12.5px;color:var(--text-dim);margin-top:8px;}
+@media(max-width:900px){.statrow{grid-template-columns:repeat(2,1fr);} h1{font-size:32px;max-width:none;}}
+
+.headline-findings{margin-top:36px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.finding{border-left:2px solid var(--amber);padding:2px 0 2px 16px;}
+.finding .ftitle{font-weight:600;font-size:15px;margin-bottom:5px;}
+.finding p{margin:0;font-size:13.5px;color:var(--text-dim);}
+@media(max-width:900px){.headline-findings{grid-template-columns:1fr;}}
+
+/* ---------- generic section ---------- */
+section{padding:56px 0;border-bottom:1px solid var(--line);}
+.sechead{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px;gap:20px;flex-wrap:wrap;}
+h2{font-size:26px;margin:0;font-weight:600;letter-spacing:-.01em;}
+.secnote{font-family:var(--mono);font-size:12.5px;color:var(--text-faint);max-width:40ch;text-align:right;}
+@media(max-width:720px){.secnote{text-align:left;}}
+
+/* ---------- pattern bars ---------- */
+.chartgrid{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;}
+@media(max-width:900px){.chartgrid{grid-template-columns:1fr;}}
+.barblock{margin-bottom:20px;}
+.barblock:last-child{margin-bottom:0;}
+.bar-row{display:grid;grid-template-columns:150px 1fr 46px;align-items:center;gap:10px;margin-bottom:9px;font-size:13px;}
+.bar-label{color:var(--text-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bar-track{height:9px;background:var(--panel);border:1px solid var(--line);position:relative;}
+.bar-fill{height:100%;background:var(--amber);}
+.bar-fill.alt{background:var(--teal);}
+.bar-fill.warn{background:var(--red);}
+.bar-val{font-family:var(--mono);font-size:12px;color:var(--text-faint);text-align:right;}
+.blocktitle{font-family:var(--mono);font-size:12px;text-transform:none;color:var(--text-faint);margin-bottom:14px;}
+
+.catmatrix{display:flex;flex-direction:column;gap:11px;}
+.catrow{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;}
+.catname{font-size:12.5px;color:var(--text-dim);}
+.stackbar{display:flex;height:16px;width:100%;overflow:hidden;border:1px solid var(--line);}
+.seg{height:100%;}
+.seg.yes{background:var(--teal);}
+.seg.partial{background:var(--amber);}
+.seg.no{background:var(--red);}
+.seg.unknown, .seg.na{background:var(--text-faint);opacity:.5;}
+.legend{display:flex;gap:16px;margin-top:16px;font-size:12px;color:var(--text-dim);flex-wrap:wrap;}
+.legend span{display:inline-flex;align-items:center;gap:6px;}
+.dot{width:9px;height:9px;display:inline-block;}
+
+/* ---------- pipeline ---------- */
+.pipeline{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);}
+.pstep{padding:26px 24px;position:relative;border-right:1px solid var(--line);}
+.pstep:last-child{border-right:none;}
+.pnum{font-family:var(--mono);color:var(--amber);font-size:13px;margin-bottom:10px;}
+.pstep h3{font-size:16px;margin:0 0 10px;}
+.pstep p{font-size:13.5px;color:var(--text-dim);margin:0 0 12px;}
+.pmetric{font-family:var(--mono);font-size:12.5px;background:var(--panel);border:1px solid var(--line);padding:8px 10px;display:inline-block;}
+@media(max-width:900px){.pipeline{grid-template-columns:1fr;}.pstep{border-right:none;border-bottom:1px solid var(--line);}.pstep:last-child{border-bottom:none;}}
+
+.codepanel{background:#0b0d10;border:1px solid var(--line);padding:18px 20px;font-family:var(--mono);font-size:12.3px;color:#c9d1d9;overflow-x:auto;white-space:pre;margin-top:24px;line-height:1.6;}
+.codepanel .c1{color:#7fd8c9;}
+.codepanel .c2{color:#e8a33d;}
+.codepanel .c3{color:#8b8f99;}
+
+/* ---------- table ---------- */
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;align-items:center;}
+.controls input[type=text]{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:8px 12px;font-family:var(--mono);font-size:13px;min-width:200px;}
+.controls select{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:8px 10px;font-family:var(--mono);font-size:12.5px;}
+.controls label{font-family:var(--mono);font-size:11.5px;color:var(--text-faint);display:flex;gap:6px;align-items:center;}
+.count-tag{font-family:var(--mono);font-size:12px;color:var(--text-faint);margin-left:auto;}
+
+.tablewrap{border:1px solid var(--line);overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:900px;}
+thead th{text-align:left;font-family:var(--mono);font-weight:500;font-size:11px;color:var(--text-faint);padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap;position:sticky;top:0;background:var(--ink2);}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+tbody tr{cursor:pointer;}
+tbody tr:hover{background:var(--panel);}
+tbody tr.open{background:var(--panel);}
+.app-name{font-weight:600;}
+.app-cat{font-size:11px;color:var(--text-faint);}
+.badge{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 7px;border:1px solid;line-height:1.6;white-space:nowrap;}
+.badge.yes{color:var(--teal);border-color:var(--teal-dim);}
+.badge.partial{color:var(--amber);border-color:var(--amber-dim);}
+.badge.no{color:var(--red);border-color:var(--red-dim);}
+.badge.unknown,.badge.na{color:var(--text-faint);border-color:var(--line);}
+.badge.mcp-yes{color:var(--teal);border-color:var(--teal-dim);}
+.badge.mcp-no{color:var(--text-faint);border-color:var(--line);}
+.conf{font-family:var(--mono);font-size:11px;}
+.conf.high{color:var(--teal);}
+.conf.medium{color:var(--amber);}
+.conf.low{color:var(--red);}
+.vflag{font-family:var(--mono);font-size:10.5px;color:var(--teal);}
+.detailrow td{background:var(--paper);color:#2a2d33;padding:18px 22px;border-bottom:2px solid var(--amber);}
+:root[data-theme="dark"] .detailrow td, .detailrow td{background:#171a20;color:var(--text);}
+.detailgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;font-size:13px;}
+@media(max-width:720px){.detailgrid{grid-template-columns:1fr;}}
+.detailgrid h4{margin:0 0 4px;font-size:11.5px;font-family:var(--mono);color:var(--text-faint);font-weight:500;}
+.detailgrid p{margin:0 0 12px;color:var(--text-dim);}
+.evlink{font-family:var(--mono);font-size:12px;}
+
+/* ---------- verification ---------- */
+.calib{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:36px;}
+.calibcell{background:var(--ink2);padding:22px;}
+.calibcell .conflabel{font-family:var(--mono);font-size:12px;margin-bottom:10px;}
+.calibcell .bignum{font-family:var(--mono);font-size:28px;font-weight:600;}
+.calibcell .sub{font-size:12.5px;color:var(--text-dim);margin-top:6px;}
+
+.vcard{border:1px solid var(--line);margin-bottom:14px;}
+.vhead{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;gap:14px;cursor:pointer;}
+.vhead:hover{background:var(--panel);}
+.vhead .vapp{font-weight:600;font-size:14.5px;}
+.verdict{font-family:var(--mono);font-size:11px;padding:3px 9px;border:1px solid;white-space:nowrap;}
+.verdict.hit{color:var(--teal);border-color:var(--teal-dim);}
+.verdict.miss{color:var(--red);border-color:var(--red-dim);}
+.verdict.partial{color:var(--amber);border-color:var(--amber-dim);}
+.vbody{padding:0 18px 18px;font-size:13.5px;color:var(--text-dim);display:none;}
+.vbody.open{display:block;}
+.vbody .vlabel{font-family:var(--mono);font-size:11px;color:var(--text-faint);margin:12px 0 4px;}
+.vbody p{margin:0;}
+.vbody .src{font-family:var(--mono);font-size:11.5px;color:var(--text-faint);margin-top:12px;}
+
+/* ---------- honesty ---------- */
+.honestygrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+@media(max-width:900px){.honestygrid{grid-template-columns:1fr;}}
+.hcard{border:1px solid var(--line);padding:20px 22px;}
+.hcard h3{margin:0 0 10px;font-size:15px;}
+.hcard ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--text-dim);}
+.hcard li{margin-bottom:7px;}
+
+footer{padding:44px 0 60px;}
+.footgrid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;align-items:flex-start;}
+.footgrid a{color:var(--amber);text-decoration:none;font-family:var(--mono);font-size:13px;}
+.footnote{font-size:12.5px;color:var(--text-faint);max-width:60ch;}
+
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+.pill{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);padding:5px 10px;color:var(--text-dim);}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand"><b>◆ Composio Research Agent</b> · toolkit-feasibility study</div>
+    <nav class="topnav">
+      <a href="#patterns">Patterns</a>
+      <a href="#table">All 100</a>
+      <a href="#agent">The Agent</a>
+      <a href="#verification">Verification</a>
+      <a href="#honesty">What Went Wrong</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="hero">
+  <p class="kicker">AI Product Ops — take-home, 100-app research pass</p>
+  <h1>We asked an agent to case 100 APIs. It got 18% right on its own.</h1>
+  <p class="lede">Every app below was researched by a real pipeline — a fetch agent that hit the actual docs URL, a knowledge pass that read the results, and a live-search verification loop that checked the riskiest claims. <b>This page shows all three passes, including where the agent was wrong</b> — not just the polished final table.</p>
+
+  <div class="statrow" id="stat-row"></div>
+
+  <div class="headline-findings" id="headline-findings"></div>
+</div>
+
+<section id="patterns">
+  <div class="sechead">
+    <h2>The patterns across all 100</h2>
+    <div class="secnote">Computed live, in your browser, from the same 100-row dataset in the table below.</div>
+  </div>
+  <div class="chartgrid">
+    <div>
+      <div class="blocktitle">Auth method distribution (an app can use more than one)</div>
+      <div class="barblock" id="auth-bars"></div>
+      <div class="blocktitle" style="margin-top:30px;">Top blockers on the 36 gated / partially-gated apps</div>
+      <div class="barblock" id="blocker-bars"></div>
+    </div>
+    <div>
+      <div class="blocktitle">Self-serve status, by category</div>
+      <div class="catmatrix" id="cat-matrix"></div>
+      <div class="legend">
+        <span><i class="dot" style="background:var(--teal)"></i>Self-serve</span>
+        <span><i class="dot" style="background:var(--amber)"></i>Partial / has a gate</span>
+        <span><i class="dot" style="background:var(--red)"></i>Gated / no</span>
+        <span><i class="dot" style="background:var(--text-faint);opacity:.5"></i>Unknown / n·a</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="table">
+  <div class="sechead">
+    <h2>All 100, filterable</h2>
+    <div class="secnote">Click a row for the full write-up + evidence link. 8 rows carry a <span class="vflag">✓ verified</span> tag — checked against live docs, not just knowledge.</div>
+  </div>
+  <div class="controls">
+    <input type="text" id="f-search" placeholder="search app or one-liner…">
+    <select id="f-category"><option value="">All categories</option></select>
+    <select id="f-selfserve">
+      <option value="">Self-serve: any</option>
+      <option value="yes">Yes</option>
+      <option value="partial">Partial</option>
+      <option value="no">No</option>
+      <option value="unknown">Unknown</option>
+    </select>
+    <select id="f-buildable">
+      <option value="">Buildable: any</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+    <select id="f-mcp">
+      <option value="">MCP: any</option>
+      <option value="yes">Has MCP</option>
+      <option value="no">No MCP found</option>
+    </select>
+    <label><input type="checkbox" id="f-verified"> verified-only</label>
+    <span class="count-tag" id="row-count"></span>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th><th>App</th><th>Auth</th><th>Self-serve</th><th>MCP</th><th>Buildable</th><th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+</section>
+
+<section id="agent">
+  <div class="sechead">
+    <h2>The agent — three passes, not one</h2>
+    <div class="secnote">Real HTTP fetches against the docs URLs from the assignment sheet, run in this pipeline.</div>
+  </div>
+
+  <div class="pipeline">
+    <div class="pstep">
+      <div class="pnum">01 · fetch_agent.py</div>
+      <h3>Automated scrape</h3>
+      <p>Hits the real hint URL for all 100 apps, records status/redirects, and keyword-matches the HTML for auth, API-shape, and self-serve vs. gated signals. Zero human input.</p>
+      <div class="pmetric" id="fetch-metric">94/100 URLs fetched</div>
+    </div>
+    <div class="pstep">
+      <div class="pnum">02 · knowledge_base.py</div>
+      <h3>Reviewer merge</h3>
+      <p>A knowledgeable reviewer reads the agent's raw signal + fetched pages and writes a judgment per app, tagging every row <b>high / medium / low</b> confidence <i>before</i> checking anything externally.</p>
+      <div class="pmetric" id="agree-metric">Agent-alone agreement: 18.1%</div>
+    </div>
+    <div class="pstep">
+      <div class="pnum">03 · verification_log.py</div>
+      <h3>Live-search verification</h3>
+      <p>Real web searches against a sample, weighted toward the lowest-confidence rows, cross-checking claims against current docs and pricing pages before anything gets published.</p>
+      <div class="pmetric" id="verif-metric">8 apps checked live</div>
+    </div>
+  </div>
+
+  <div class="codepanel">$ python3 agent/fetch_agent.py
+<span class="c3">[  1] Salesforce        ok=True  status=200 bytes=400000 t=0.72s
+[ 44] Salesforce Commerce Cloud  ok=False status=403 ...
+[ 52] SE Ranking         ok=False status=404 ...
+[ 84] Paygent Connect    ok=False status=None error=&lt;urlopen error&gt; ...</span>
+...
+<span class="c1">Fetch agent finished. 94/100 URLs returned usable HTML (94.0% success rate).</span>
+
+$ python3 agent/analyze.py   <span class="c3"># cross-tab agent keyword-guess vs reviewer verdict on self-serve</span>
+<span class="c2">agent_only_agreement_pct: 18.1</span>   <span class="c3"># most docs homepages contain BOTH "sign up free" AND
+                                    # "contact sales" nav links — keyword heuristics alone
+                                    # can't tell self-serve from sales-gated. This is why
+                                    # pass 2 and pass 3 exist.</span></div>
+
+  <p style="font-size:13.5px;color:var(--text-dim);max-width:70ch;margin-top:22px;">
+  <b style="color:var(--text)">Where a human was needed, concretely:</b> deciding what "self-serve" means per product (a free dev sandbox vs. a real production key are different claims); reading pricing pages to find plan-gates the scraper can't parse; resolving name collisions (e.g. two unrelated products both called "Otter"); and — critically — running the search-verification loop below, which a keyword scraper cannot do on its own.
+  </p>
+</section>
+
+<section id="verification">
+  <div class="sechead">
+    <h2>Verification: how accuracy actually moved</h2>
+    <div class="secnote">8-app sample, deliberately weighted toward the riskiest (low/medium-confidence) claims — a stress test, not a random sample.</div>
+  </div>
+
+  <div class="calib" id="calib-grid"></div>
+
+  <div id="verif-cards"></div>
+</section>
+
+<section id="honesty">
+  <div class="sechead">
+    <h2>What the agent got wrong, said plainly</h2>
+  </div>
+  <div class="honestygrid">
+    <div class="hcard">
+      <h3>Corrected after verification (4)</h3>
+      <ul>
+        <li><b>Pylon</b> — assumed a paid-plan API gate that doesn't exist; any Admin can self-serve a token.</li>
+        <li><b>Waterfall.io</b> — couldn't identify the product from the hint alone; it's a real, self-serve B2B enrichment API.</li>
+        <li><b>fanbasis</b> — assumed no public API existed; it has one, but the docs portal itself needs a login (a different blocker than we guessed).</li>
+        <li><b>Otter.ai</b> — training-era knowledge said "no API"; it shipped one in 2025. A knowledge cutoff, not a scraping failure.</li>
+      </ul>
+    </div>
+    <div class="hcard">
+      <h3>Refined, not wrong (1)</h3>
+      <ul>
+        <li><b>Ahrefs</b> — the "paid-plan gate" direction was right, but the specific claim ("Enterprise-only") was stale; 2026 sources show it widened to the Lite tier.</li>
+      </ul>
+    </div>
+    <div class="hcard">
+      <h3>Still low-confidence, unverified (11 of 100)</h3>
+      <ul id="low-conf-list"></ul>
+    </div>
+    <div class="hcard">
+      <h3>Not really API products at all (2)</h3>
+      <ul>
+        <li><b>Sherlock</b> and <b>Mermaid CLI</b> are open-source local tools with no hosted service or auth — a toolkit would shell out to them, not call an API. Included as-is because the brief asked for a verdict on all 100, not just the API-shaped ones.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footgrid">
+    <div>
+      <div class="pill-row">
+        <span class="pill">Dataset: apps_final.json (100 rows)</span>
+        <span class="pill">Verification log: verification.json</span>
+        <span class="pill">Agent: fetch_agent.py</span>
+      </div>
+      <p class="footnote" style="margin-top:18px;">Built for the Composio AI Product Ops take-home. Every claim on this page traces to one of: a live HTTP fetch, a reviewer judgment (tagged with its own confidence level), or a live web search run during the verification pass — see the source repo for all three raw outputs.</p>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script id="app-data" type="application/json">__APP_DATA__</script>
+<script id="verification-data" type="application/json">__VERIF_DATA__</script>
+
+<script>
+const APPS = JSON.parse(document.getElementById('app-data').textContent);
+const VERIF = JSON.parse(document.getElementById('verification-data').textContent);
+
+function pct(n,d){ return d ? Math.round(1000*n/d)/10 : 0; }
+
+// Returns a working URL for the first comma-separated evidence citation,
+// or null if it doesn't look like a real domain/URL (e.g. "no confident
+// public docs identified") — callers must handle the null case rather
+// than linkify free text.
+function evidenceUrl(ev){
+  if(!ev) return null;
+  const first = ev.split(',')[0].trim();
+  if(/\s/.test(first)) return null; // contains spaces/parens -> not a bare URL/domain
+  if(first.startsWith('http')) return first;
+  if(/^[a-z0-9.-]+\.[a-z]{2,}(\/.*)?$/i.test(first)) return 'https://' + first;
+  return null;
+}
+
+// ---------- headline stats ----------
+function computeStats(){
+  const n = APPS.length;
+  const selfServe = {}; APPS.forEach(a=>{selfServe[a.self_serve]=(selfServe[a.self_serve]||0)+1;});
+  const buildYes = APPS.filter(a=>a.buildability==='yes').length;
+  const buildNo = APPS.filter(a=>a.buildability==='no').length;
+  const mcpYes = APPS.filter(a=>a.mcp && a.mcp.startsWith('yes')).length;
+  const confLow = APPS.filter(a=>a.confidence==='low').length;
+  return {n, selfServe, buildYes, buildNo, mcpYes, confLow};
+}
+const S = computeStats();
+
+const buildYesPct = pct(S.buildYes, S.n);
+document.getElementById('stat-row').innerHTML = `
+  <div class="stat"><div class="n">${S.n}</div><div class="l">apps researched across 10 categories</div></div>
+  <div class="stat"><div class="n">${buildYesPct}%</div><div class="l">buildable today, no gate blocking it (${S.buildYes} of ${S.n})</div></div>
+  <div class="stat"><div class="n">${S.mcpYes}</div><div class="l">already have a known MCP server</div></div>
+  <div class="stat"><div class="n">18.1%</div><div class="l">raw keyword-agent accuracy, before any review</div></div>
+  <div class="stat"><div class="n">4/4</div><div class="l">"low-confidence" flags that needed correction on verification</div></div>
+`;
+
+document.getElementById('headline-findings').innerHTML = `
+  <div class="finding"><div class="ftitle">API key/token beats OAuth, narrowly</div><p>73 of 100 apps offer an API-key or personal-token path — the fastest route to a working agent toolkit — vs. 62 that need an OAuth2 flow (many offer both).</p></div>
+  <div class="finding"><div class="ftitle">Gating clusters by business model, not category</div><p>Payment/finance and B2B ad platforms (LinkedIn, Google Ads, Brex, Ramp) are gated by partner or customer status. Dev-infra and productivity tools (GitHub, Notion, Linear, Supabase) are almost universally instant self-serve.</p></div>
+  <div class="finding"><div class="ftitle">The agent alone is not trustworthy</div><p>A pure keyword scraper agreed with the reviewed self-serve verdict only 18.1% of the time — most SaaS docs pages contain both "sign up free" and "contact sales" links regardless of actual gating. Verification loops aren't optional.</p></div>
+`;
+
+// ---------- auth bars ----------
+function authCounts(){
+  const c = {'API key / token':0,'OAuth2':0,'Basic auth':0,'None / unclear':0};
+  APPS.forEach(a=>{
+    const al = a.auth.toLowerCase();
+    if(al.includes('api key')||al.includes('token')) c['API key / token']++;
+    if(al.includes('oauth')) c['OAuth2']++;
+    if(al.includes('basic')) c['Basic auth']++;
+    if(al.includes('none')||al.includes('n/a')||al.includes('unclear')) c['None / unclear']++;
+  });
+  return c;
+}
+function renderBars(container, counts, total, colorClass){
+  const max = Math.max(...Object.values(counts));
+  container.innerHTML = Object.entries(counts).map(([k,v])=>`
+    <div class="bar-row">
+      <div class="bar-label">${k}</div>
+      <div class="bar-track"><div class="bar-fill ${colorClass||''}" style="width:${max?Math.round(100*v/max):0}%"></div></div>
+      <div class="bar-val">${v}</div>
+    </div>`).join('');
+}
+renderBars(document.getElementById('auth-bars'), authCounts(), S.n);
+
+// ---------- blocker bars ----------
+function blockerCounts(){
+  const buckets = {
+    'Paid-plan / enterprise-tier gate': b=>/enterprise|paid-plan|plan gate|paid plan/.test(b),
+    'App / production review required': b=>/review/.test(b) && /production|app review|publish/.test(b),
+    'Partnership / partner-program gate': b=>/partner/.test(b),
+    'Customer-only credentials': b=>/customer/.test(b),
+    'No public API found': b=>/no public|not confidently/.test(b),
+    'Docs portal itself login-gated': b=>/login-gated|docs portal/.test(b),
+    'Not API-first (CLI/local tool)': b=>/cli|not an api|not a hosted/.test(b),
+    'Contact-sales / apply-for-access': b=>/contact|apply|sales/.test(b),
+  };
+  const counts = {}; Object.keys(buckets).forEach(k=>counts[k]=0);
+  let other = 0;
+  APPS.forEach(a=>{
+    const b = (a.blocker||'').toLowerCase();
+    if(!b) return;
+    let matched = false;
+    for(const [k,fn] of Object.entries(buckets)){ if(fn(b)){counts[k]++; matched=true; break;} }
+    if(!matched) other++;
+  });
+  counts['Other / product-specific friction'] = other;
+  // sort desc, drop zeros
+  return Object.fromEntries(Object.entries(counts).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]));
+}
+renderBars(document.getElementById('blocker-bars'), blockerCounts(), S.n, 'warn');
+
+// ---------- category matrix ----------
+function categoryMatrix(){
+  const cats = {};
+  APPS.forEach(a=>{
+    cats[a.category] = cats[a.category] || {yes:0,partial:0,no:0,unknown:0,'n/a':0};
+    const key = cats[a.category][a.self_serve] !== undefined ? a.self_serve : 'unknown';
+    cats[a.category][key]++;
+  });
+  return cats;
+}
+const cm = categoryMatrix();
+document.getElementById('cat-matrix').innerHTML = Object.entries(cm).map(([cat,vals])=>{
+  const total = Object.values(vals).reduce((a,b)=>a+b,0);
+  const segs = Object.entries(vals).filter(([,v])=>v>0).map(([k,v])=>{
+    const cls = (k==='n/a')?'na':k;
+    return `<div class="seg ${cls}" style="width:${100*v/total}%" title="${k}: ${v}"></div>`;
+  }).join('');
+  return `<div class="catrow"><div class="catname">${cat}</div><div class="stackbar">${segs}</div></div>`;
+}).join('');
+
+// ---------- table ----------
+const catSelect = document.getElementById('f-category');
+[...new Set(APPS.map(a=>a.category))].forEach(c=>{
+  const o = document.createElement('option'); o.value=c; o.textContent=c; catSelect.appendChild(o);
+});
+
+function badgeClass(v){
+  if(v === 'n/a') return 'na';
+  return ['yes','partial','no','unknown'].includes(v) ? v : 'unknown';
+}
+
+function renderTable(){
+  const q = document.getElementById('f-search').value.toLowerCase();
+  const cat = document.getElementById('f-category').value;
+  const ss = document.getElementById('f-selfserve').value;
+  const bl = document.getElementById('f-buildable').value;
+  const mcp = document.getElementById('f-mcp').value;
+  const verifiedOnly = document.getElementById('f-verified').checked;
+
+  const rows = APPS.filter(a=>{
+    if(q && !(a.app.toLowerCase().includes(q) || a.one_liner.toLowerCase().includes(q))) return false;
+    if(cat && a.category!==cat) return false;
+    if(ss && a.self_serve!==ss) return false;
+    if(bl && a.buildability!==bl) return false;
+    if(mcp==='yes' && !(a.mcp && a.mcp.startsWith('yes'))) return false;
+    if(mcp==='no' && (a.mcp && a.mcp.startsWith('yes'))) return false;
+    if(verifiedOnly && !a.verified) return false;
+    return true;
+  });
+
+  document.getElementById('row-count').textContent = `${rows.length} / ${APPS.length} shown`;
+
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML = rows.map(a=>`
+    <tr data-id="${a.id}">
+      <td class="app-cat">${a.id}</td>
+      <td><div class="app-name">${a.app}${a.verified?' <span class=\"vflag\">✓</span>':''}</div><div class="app-cat">${a.category}</div></td>
+      <td style="font-size:12px;color:var(--text-dim)">${a.auth}</td>
+      <td><span class="badge ${badgeClass(a.self_serve)}">${a.self_serve}</span></td>
+      <td><span class="badge ${a.mcp && a.mcp.startsWith('yes')?'mcp-yes':'mcp-no'}">${a.mcp && a.mcp.startsWith('yes')?'yes':'—'}</span></td>
+      <td><span class="badge ${a.buildability==='yes'?'yes':(a.buildability==='no'?'no':'partial')}">${a.buildability}</span></td>
+      <td><span class="conf ${a.confidence}">${a.confidence}</span></td>
+    </tr>
+    <tr class="detailrow" id="detail-${a.id}" style="display:none;"><td colspan="7">
+      <div class="detailgrid">
+        <div>
+          <h4>What it does</h4><p>${a.one_liner}</p>
+          <h4>Self-serve note</h4><p>${a.self_serve_note}</p>
+          <h4>API surface</h4><p>${a.api_surface}</p>
+        </div>
+        <div>
+          <h4>Blocker (if any)</h4><p>${a.blocker || '— none —'}</p>
+          <h4>Evidence</h4><p class="evlink">${evidenceUrl(a.evidence) ? `<a href="${evidenceUrl(a.evidence)}" target="_blank" rel="noopener">${a.evidence}</a>` : a.evidence}</p>
+          ${a.verified ? '<h4>Verification status</h4><p style="color:var(--teal)">✓ Checked against live docs during the verification pass — see the Verification section below.</p>' : ''}
+        </div>
+      </div>
+    </td></tr>
+  `).join('');
+
+  tbody.querySelectorAll('tr[data-id]').forEach(tr=>{
+    tr.addEventListener('click', ()=>{
+      const id = tr.getAttribute('data-id');
+      const d = document.getElementById('detail-'+id);
+      const isOpen = d.style.display === 'table-row';
+      tbody.querySelectorAll('.detailrow').forEach(x=>x.style.display='none');
+      tbody.querySelectorAll('tr[data-id]').forEach(x=>x.classList.remove('open'));
+      if(!isOpen){ d.style.display='table-row'; tr.classList.add('open'); }
+    });
+  });
+}
+['f-search','f-category','f-selfserve','f-buildable','f-mcp','f-verified'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', renderTable);
+  document.getElementById(id).addEventListener('change', renderTable);
+});
+renderTable();
+
+// ---------- low confidence list ----------
+document.getElementById('low-conf-list').innerHTML = APPS.filter(a=>a.confidence==='low' && !a.verified)
+  .map(a=>`<li><b>${a.app}</b> — ${a.self_serve_note}</li>`).join('');
+
+// ---------- calibration ----------
+const calib = {low:{n:0,corrected:0}, medium:{n:0,corrected:0}, high:{n:0,corrected:0}};
+VERIF.cases.forEach(c=>{
+  const k = c.pass2_confidence;
+  calib[k].n++;
+  if(c.verdict.startsWith('MISS') || c.verdict.includes('PARTIAL')) calib[k].corrected++;
+});
+document.getElementById('calib-grid').innerHTML = ['low','medium','high'].map(k=>{
+  const v = calib[k];
+  const rate = v.n ? Math.round(100*v.corrected/v.n) : 0;
+  const color = k==='low'?'var(--red)':(k==='medium'?'var(--amber)':'var(--teal)');
+  return `<div class="calibcell">
+    <div class="conflabel" style="color:${color}">"${k}" confidence, before verification</div>
+    <div class="bignum" style="color:${color}">${rate}%</div>
+    <div class="sub">${v.corrected} of ${v.n} checked claims needed correction</div>
+  </div>`;
+}).join('');
+
+// ---------- verification cards ----------
+document.getElementById('verif-cards').innerHTML = VERIF.cases.map((c,i)=>{
+  const vClass = c.verdict.startsWith('HIT') ? 'hit' : (c.verdict.includes('PARTIAL') ? 'partial' : 'miss');
+  const vLabel = c.verdict.split('—')[0].trim();
+  return `<div class="vcard">
+    <div class="vhead" onclick="document.getElementById('vbody-${i}').classList.toggle('open')">
+      <div class="vapp">${c.app} <span style="color:var(--text-faint);font-weight:400;font-size:12.5px">— pre-check confidence: ${c.pass2_confidence}</span></div>
+      <span class="verdict ${vClass}">${vLabel}</span>
+    </div>
+    <div class="vbody" id="vbody-${i}">
+      <div class="vlabel">Pass-2 claim</div><p>${c.claim}</p>
+      <div class="vlabel">What live search found</div><p>${c.found}</p>
+      <div class="src">Source: ${c.source}</div>
+    </div>
+  </div>`;
+}).join('');
+
+// open first two verification cards by default so it's skimmable
+setTimeout(()=>{ document.querySelectorAll('.vbody')[0]?.classList.add('open'); document.querySelectorAll('.vbody')[1]?.classList.add('open'); }, 0);
+
+// ---------- pipeline metrics (kept in sync w/ real run) ----------
+document.getElementById('fetch-metric').textContent = '94/100 URLs fetched · 6 blocked (403/404/DNS)';
+document.getElementById('agree-metric').textContent = 'Agent-alone agreement: 18.1%';
+document.getElementById('verif-metric').textContent = `${VERIF.summary.sample_size} apps checked · ${VERIF.summary.hits} confirmed, ${VERIF.summary.misses} corrected, ${VERIF.summary.partial_misses} refined`;
+</script>
+</body>
+</html>
